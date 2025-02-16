@@ -49,7 +49,7 @@ ingress:
 # The config: {} dictionary is converted to environmental variables in the ConfigMap.
 main:
   # See https://docs.n8n.io/hosting/configuration/environment-variables/ for all values.
-  config: #{}
+  config:
   #    n8n:
      db:
        type: postgresdb
