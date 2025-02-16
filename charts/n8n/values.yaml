@@ -33,40 +33,40 @@ imagePullSecrets: []
 # Ingress
 #
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
   # define a custom ingress class Name, like "traefik" or "nginx"
-  className: ""
+  className: "nginx"
   hosts:
-    - host: workflow.example.com
+    - host: n8n.donelanconsulting.com
       paths: []
-  tls:
-    - hosts:
-        - workflow.example.com
-      secretName: host-domain-cert
+  # tls:
+  #   - hosts:
+  #       - workflow.example.com
+  #     secretName: host-domain-cert
 
 # the main (n8n) application related configuration + Kubernetes specific settings
 # The config: {} dictionary is converted to environmental variables in the ConfigMap.
 main:
   # See https://docs.n8n.io/hosting/configuration/environment-variables/ for all values.
-  config: {}
+  config: #{}
   #    n8n:
-  #    db:
-  #      type: postgresdb
-  #      postgresdb:
-  #        host: 192.168.0.52
+     db:
+       type: postgresdb
+       postgresdb:
+         host: postgres
 
   # Dictionary for secrets, unlike config:, the values here will end up in the secret file.
   # The YAML entry db.postgresdb.password: my_secret is transformed DB_POSTGRESDB_password=bXlfc2VjcmV0
   # See https://docs.n8n.io/hosting/configuration/environment-variables/
-  secret: {}
+  secret: #{}
   #    n8n:
   #     if you run n8n stateless, you should provide an encryption key here.
   #      encryption_key:
   #
-  #    database:
-  #      postgresdb:
-  #        password: 'big secret'
+     database:
+       postgresdb:
+         password: 'big secret'
 
   # Extra environmental variables, so you can reference other configmaps and secrets into n8n as env vars.
   extraEnv:
@@ -259,7 +259,7 @@ main:
 # Worker related settings
 #
 worker:
-  enabled: false
+  enabled: true
   count: 2
   # You can define the number of jobs a worker can run in parallel by using the concurrency flag. It defaults to 10. To change it:
   concurrency: 10
@@ -641,10 +641,12 @@ templates: []
 #    stringData:
 #      image_name: {{ .Values.image.repository }}
 
+postgres:
+  enabled: true
 # Bitnami Valkey configuration
 # https://artifacthub.io/packages/helm/bitnami/valkey
 redis:
-  enabled: false
+  enabled: true
   architecture: standalone
 
   primary:
