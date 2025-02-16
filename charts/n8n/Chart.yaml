@@ -29,6 +29,10 @@ dependencies:
     version: 2.2.3
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: redis.enabled
+  - name: postgresql
+    version: 16.0.4
+    repository: oci://registry-1.docker.io/bitnamicharts
+    condition: postgres.enabled
 annotations:
   artifacthub.io/prerelease: "true"
   # supported kinds are added, changed, deprecated, removed, fixed and security.
